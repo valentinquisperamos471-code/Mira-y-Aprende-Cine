@@ -1,0 +1,1354 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>🎬 Mira y Aprende | Cine Reciclable</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,sans-serif;
+}
+
+html{
+scroll-behavior:smooth;
+}
+
+body{
+background:#000;
+color:white;
+overflow-x:hidden;
+}
+
+/* LOADER */
+
+#loader{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:black;
+display:flex;
+justify-content:center;
+align-items:center;
+flex-direction:column;
+z-index:999999;
+animation:loaderOut 4s forwards;
+}
+
+#loader h1{
+font-size:4rem;
+color:#22c55e;
+text-shadow:
+0 0 15px #22c55e,
+0 0 30px #22c55e,
+0 0 60px #22c55e;
+animation:pulse 2s infinite;
+}
+
+#loader p{
+margin-top:20px;
+font-size:1.2rem;
+color:#ccc;
+}
+
+@keyframes loaderOut{
+0%{opacity:1;}
+85%{opacity:1;}
+100%{
+opacity:0;
+visibility:hidden;
+}
+}
+
+@keyframes pulse{
+0%{opacity:.5;}
+50%{opacity:1;}
+100%{opacity:.5;}
+}
+
+/* PARTICLES */
+
+.particles{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+pointer-events:none;
+opacity:.15;
+z-index:-1;
+
+background-image:
+radial-gradient(#22c55e 1px, transparent 1px);
+
+background-size:40px 40px;
+
+animation:moveParticles 25s linear infinite;
+}
+
+@keyframes moveParticles{
+from{transform:translateY(0);}
+to{transform:translateY(-100px);}
+}
+
+/* NAV */
+
+header{
+position:sticky;
+top:0;
+z-index:999;
+background:#000000e8;
+backdrop-filter:blur(10px);
+
+display:flex;
+justify-content:space-between;
+align-items:center;
+flex-wrap:wrap;
+
+padding:15px 20px;
+
+border-bottom:1px solid #222;
+}
+
+.logo{
+font-size:2rem;
+font-weight:bold;
+color:#22c55e;
+text-shadow:0 0 15px #22c55e;
+}
+
+.user-box{
+display:flex;
+gap:10px;
+flex-wrap:wrap;
+}
+
+input,
+select{
+padding:14px;
+border:none;
+border-radius:12px;
+font-weight:bold;
+}
+
+/* HERO */
+
+.hero{
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+text-align:center;
+padding:20px;
+
+background:
+linear-gradient(rgba(0,0,0,.7),rgba(0,0,0,.9)),
+url("https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?q=80&w=1400");
+
+background-size:cover;
+background-position:center;
+
+position:relative;
+overflow:hidden;
+}
+
+.hero::before{
+content:"";
+position:absolute;
+width:200%;
+height:200%;
+background:
+radial-gradient(circle,#22c55e22 0%,transparent 60%);
+animation:rotateBg 25s linear infinite;
+}
+
+@keyframes rotateBg{
+from{transform:rotate(0deg);}
+to{transform:rotate(360deg);}
+}
+
+.hero-content{
+position:relative;
+z-index:2;
+}
+
+.hero h1{
+font-size:5rem;
+text-shadow:
+0 0 10px #22c55e,
+0 0 20px #22c55e,
+0 0 40px #22c55e;
+animation:neon 2s infinite alternate;
+}
+
+@keyframes neon{
+from{
+text-shadow:
+0 0 10px #22c55e,
+0 0 20px #22c55e;
+}
+to{
+text-shadow:
+0 0 20px #22c55e,
+0 0 40px #22c55e,
+0 0 80px #22c55e;
+}
+}
+
+.hero p{
+margin-top:20px;
+font-size:1.3rem;
+color:#ddd;
+}
+
+.main-btn{
+margin-top:30px;
+padding:18px 35px;
+border:none;
+border-radius:15px;
+background:#16a34a;
+color:white;
+font-size:1rem;
+font-weight:bold;
+cursor:pointer;
+transition:.3s;
+}
+
+.main-btn:hover{
+transform:scale(1.05);
+box-shadow:0 0 20px #22c55e;
+}
+
+/* SIDE PANELS */
+
+.side-panels{
+position:fixed;
+left:20px;
+top:120px;
+display:flex;
+flex-direction:column;
+gap:15px;
+z-index:900;
+}
+
+.panel{
+width:250px;
+padding:20px;
+border-radius:20px;
+background:rgba(20,20,20,.7);
+backdrop-filter:blur(10px);
+border:1px solid rgba(255,255,255,.08);
+box-shadow:0 0 15px rgba(34,197,94,.1);
+}
+
+.panel h3{
+margin-bottom:10px;
+color:#22c55e;
+}
+
+.panel p{
+margin:8px 0;
+}
+
+/* QUOTES */
+
+.quote{
+padding:50px 20px;
+text-align:center;
+font-size:1.5rem;
+font-weight:bold;
+color:#22c55e;
+text-shadow:0 0 10px #22c55e;
+}
+
+/* TIMER */
+
+.live-timer{
+margin-top:15px;
+font-size:2rem;
+font-weight:bold;
+animation:pulse 1s infinite;
+}
+
+/* MOVIES */
+
+.movies{
+padding:70px 20px;
+}
+
+.movies h2{
+text-align:center;
+font-size:2.7rem;
+margin-bottom:35px;
+}
+
+.movie-grid{
+display:grid;
+grid-template-columns:
+repeat(auto-fit,minmax(260px,1fr));
+gap:25px;
+}
+
+.movie{
+background:#111;
+border-radius:20px;
+overflow:hidden;
+transition:.3s;
+}
+
+.movie:hover{
+transform:translateY(-8px);
+box-shadow:0 0 25px rgba(34,197,94,.3);
+}
+
+.movie img{
+width:100%;
+height:350px;
+object-fit:cover;
+}
+
+.movie-content{
+padding:20px;
+}
+
+.movie-content small{
+color:#22c55e;
+}
+
+.movie-content h3{
+margin:12px 0;
+}
+
+.movie-content p{
+color:#aaa;
+}
+
+.movie-content button{
+margin-top:15px;
+width:100%;
+padding:14px;
+border:none;
+border-radius:12px;
+background:#16a34a;
+color:white;
+font-weight:bold;
+cursor:pointer;
+transition:.3s;
+}
+
+.movie-content button:hover{
+transform:scale(1.03);
+box-shadow:0 0 20px #22c55e;
+}
+
+/* COMBOS */
+
+.combos{
+padding:70px 20px;
+}
+
+.combo-grid{
+display:grid;
+grid-template-columns:
+repeat(auto-fit,minmax(200px,1fr));
+gap:20px;
+}
+
+.combo{
+background:#111;
+padding:25px;
+border-radius:20px;
+text-align:center;
+transition:.3s;
+}
+
+.combo:hover{
+transform:translateY(-6px);
+box-shadow:0 0 20px rgba(34,197,94,.2);
+}
+
+.combo img{
+width:90px;
+margin-bottom:15px;
+}
+
+/* RESERVE */
+
+.reserve{
+padding:70px 20px;
+}
+
+.reserve-box{
+background:#111;
+padding:25px;
+border-radius:20px;
+}
+
+.time-btn,
+.reserve-btn{
+padding:14px 20px;
+border:none;
+border-radius:12px;
+background:#16a34a;
+color:white;
+font-weight:bold;
+cursor:pointer;
+margin:10px 5px;
+transition:.3s;
+}
+
+.time-btn:hover,
+.reserve-btn:hover{
+transform:scale(1.05);
+box-shadow:0 0 20px #22c55e;
+}
+
+.screen{
+background:white;
+color:black;
+padding:12px;
+border-radius:10px;
+text-align:center;
+font-weight:bold;
+margin:20px 0;
+}
+
+.seats{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:10px;
+}
+
+.seat{
+height:70px;
+border:none;
+border-radius:12px;
+background:#3f3f46;
+color:white;
+font-weight:bold;
+cursor:pointer;
+transition:.3s;
+}
+
+.seat:hover{
+transform:scale(1.05);
+box-shadow:0 0 15px #22c55e;
+}
+
+.selected{
+background:#16a34a;
+}
+
+.occupied{
+background:red;
+cursor:not-allowed;
+}
+
+/* TICKET */
+
+.ticket{
+background:white;
+color:black;
+padding:25px;
+border-radius:20px;
+margin-top:25px;
+}
+
+.ticket h3{
+background:#16a34a;
+color:white;
+padding:15px;
+margin:-25px -25px 20px;
+border-radius:20px 20px 0 0;
+text-align:center;
+}
+
+/* OVERLAY */
+
+#cinemaOverlay{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,.95);
+display:none;
+justify-content:center;
+align-items:center;
+z-index:999999;
+}
+
+.cinema-content{
+text-align:center;
+}
+
+.cinema-content h1{
+font-size:4rem;
+color:#22c55e;
+text-shadow:
+0 0 20px #22c55e,
+0 0 40px #22c55e;
+}
+
+.countdown{
+font-size:7rem;
+font-weight:bold;
+margin-top:25px;
+}
+
+/* SUCCESS */
+
+.success{
+position:fixed;
+top:20px;
+left:50%;
+transform:translateX(-50%);
+background:#16a34a;
+padding:15px 25px;
+border-radius:15px;
+font-weight:bold;
+z-index:99999;
+animation:fade 3s forwards;
+}
+
+@keyframes fade{
+0%{opacity:1;}
+100%{opacity:0;}
+}
+
+/* WHATSAPP */
+
+.whatsapp{
+position:fixed;
+right:20px;
+bottom:90px;
+background:#16a34a;
+padding:14px 18px;
+border-radius:15px;
+color:white;
+text-decoration:none;
+font-weight:bold;
+z-index:999;
+}
+
+/* ADMIN */
+
+#adminBtn{
+position:fixed;
+right:20px;
+bottom:20px;
+padding:14px 18px;
+border:none;
+border-radius:15px;
+background:#16a34a;
+color:white;
+font-weight:bold;
+cursor:pointer;
+z-index:999;
+}
+
+/* RESPONSIVE */
+
+@media(max-width:800px){
+
+.hero h1{
+font-size:2.5rem;
+}
+
+.side-panels{
+position:relative;
+top:0;
+left:0;
+padding:20px;
+}
+
+.panel{
+width:100%;
+}
+
+.user-box{
+width:100%;
+flex-direction:column;
+margin-top:15px;
+}
+
+input,
+select{
+width:100%;
+}
+
+.seat{
+height:75px;
+}
+
+.cinema-content h1{
+font-size:2rem;
+}
+
+.countdown{
+font-size:4rem;
+}
+
+}
+
+</style>
+</head>
+<body>
+
+<div class="particles"></div>
+
+<!-- LOADER -->
+
+<div id="loader">
+
+<h1>🎬 MIRA Y APRENDE</h1>
+
+<p>♻ Preparando experiencia cinematográfica...</p>
+
+</div>
+
+<!-- OVERLAY -->
+
+<div id="cinemaOverlay">
+
+<div class="cinema-content">
+
+<h1>🎬 LA FUNCIÓN COMENZARÁ</h1>
+
+<p>♻ Gracias por reciclar</p>
+
+<div class="countdown" id="countdown">5</div>
+
+</div>
+
+</div>
+
+<!-- WHATSAPP -->
+
+<a
+class="whatsapp"
+href="https://wa.me/51989960087"
+target="_blank">
+
+📱 ¿Necesitas ayuda?
+
+</a>
+
+<!-- ADMIN -->
+
+<button id="adminBtn">
+👑 Admin
+</button>
+
+<!-- PANELS -->
+
+<div class="side-panels">
+
+<div class="panel">
+<h3>📊 Estadísticas</h3>
+<p id="totalBottles">♻ Botellas: 0</p>
+<p id="totalSeats">🪑 Asientos: 0</p>
+<p id="onlineUsers">👥 Usuarios: 0</p>
+</div>
+
+<div class="panel">
+<h3>🏆 Ranking</h3>
+<div id="rankingList">
+<p>🥇 Sin datos</p>
+</div>
+</div>
+
+</div>
+
+<!-- NAV -->
+
+<header>
+
+<div class="logo">
+🎬 Mira y Aprende
+</div>
+
+<div class="user-box">
+
+<input
+type="text"
+id="name"
+placeholder="Tu nombre">
+
+<select id="grade">
+
+<option value="">
+Tu grado
+</option>
+
+<option>Primaria</option>
+<option>1 Sec</option>
+<option>2 Sec</option>
+<option>3 Sec</option>
+<option>4 Sec</option>
+<option>5 Sec</option>
+
+</select>
+
+</div>
+
+</header>
+
+<!-- HERO -->
+
+<section class="hero">
+
+<div class="hero-content">
+
+<h1>
+🎬 FESTIVAL DE CINE RECICLABLE 2026
+</h1>
+
+<p>
+♻ Vive una experiencia escolar inolvidable
+</p>
+
+<button
+class="main-btn"
+onclick="scrollMovies()">
+
+Ver cartelera
+
+</button>
+
+</div>
+
+</section>
+
+<!-- QUOTES -->
+
+<section class="quote">
+
+♻ Cada botella cambia el futuro 🎬
+
+</section>
+
+<section class="quote">
+
+⏳ La próxima función inicia en:
+
+<div class="live-timer" id="liveTimer">
+
+00:00:00
+
+</div>
+
+</section>
+
+<!-- MOVIES -->
+
+<section class="movies" id="movies">
+
+<h2>🍿 Cartelera</h2>
+
+<div class="movie-grid" id="movieGrid"></div>
+
+</section>
+
+<!-- COMBOS -->
+
+<section class="combos">
+
+<h2
+style="
+text-align:center;
+margin-bottom:35px;
+font-size:2.5rem;
+">
+
+🍿 Combos
+
+</h2>
+
+<div class="combo-grid">
+
+<div class="combo">
+
+<img src="https://cdn-icons-png.flaticon.com/512/2515/2515183.png">
+
+<h3>Cancha Salada</h3>
+
+<p>S/5</p>
+
+</div>
+
+<div class="combo">
+
+<img src="https://cdn-icons-png.flaticon.com/512/3081/3081986.png">
+
+<h3>Cancha Dulce</h3>
+
+<p>S/6</p>
+
+</div>
+
+<div class="combo">
+
+<img src="https://cdn-icons-png.flaticon.com/512/2405/2405479.png">
+
+<h3>Gaseosa</h3>
+
+<p>S/6</p>
+
+</div>
+
+<div class="combo">
+
+<img src="https://cdn-icons-png.flaticon.com/512/1046/1046784.png">
+
+<h3>Mixto</h3>
+
+<p>S/9</p>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- RESERVE -->
+
+<section class="reserve" id="reserve"></section>
+
+<!-- FIREBASE -->
+
+<script type="module">
+
+import {
+initializeApp
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+
+import {
+getFirestore,
+doc,
+setDoc,
+getDocs,
+collection,
+onSnapshot
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+/* PEGA TU FIREBASE AQUI */
+
+const firebaseConfig = {
+
+apiKey: "PEGA_AQUI",
+authDomain: "PEGA_AQUI",
+projectId: "PEGA_AQUI",
+storageBucket: "PEGA_AQUI",
+messagingSenderId: "PEGA_AQUI",
+appId: "PEGA_AQUI"
+
+};
+
+const app =
+initializeApp(firebaseConfig);
+
+const db =
+getFirestore(app);
+
+/* MOVIES */
+
+const movies = [
+
+{
+id:"mario",
+title:"🍄 Super Mario Galaxy",
+genre:"Familiar",
+desc:"Animación",
+image:"https://m.media-amazon.com/images/S/pv-target-images/763db971dde3179cd23c0b16a7b9ee93314c35be4dd2e1a8372afa52178779f8.jpg",
+times:["2:00 PM","4:00 PM"]
+},
+
+{
+id:"momia",
+title:"😱 La Posesión de la Momia",
+genre:"Terror",
+desc:"Solo secundaria",
+image:"https://sacnkprodpecms.blob.core.windows.net/content/posters/HO00008859.jpg",
+times:["3:00 PM","6:00 PM"],
+terror:true
+},
+
+{
+id:"michael",
+title:"🎤 Michael",
+genre:"Drama",
+desc:"Biográfica",
+image:"https://m.media-amazon.com/images/M/MV5BNzllNmRlN2EtMDQyOC00ODJjLTg4OWQtZDNmNGU3YzlkNjc1XkEyXkFqcGc@._V1_.jpg",
+times:["1:00 PM","5:00 PM"]
+}
+
+];
+
+const seats = [
+
+"A1","A2","A3","A4",
+"B1","B2","B3","B4",
+"C1","C2","C3","C4",
+"D1","D2","D3","D4"
+
+];
+
+const movieGrid =
+document.getElementById("movieGrid");
+
+const reserve =
+document.getElementById("reserve");
+
+/* LOAD MOVIES */
+
+movies.forEach(movie=>{
+
+movieGrid.innerHTML += `
+
+<div class="movie">
+
+<img src="${movie.image}">
+
+<div class="movie-content">
+
+<small>${movie.genre}</small>
+
+<h3>${movie.title}</h3>
+
+<p>${movie.desc}</p>
+
+<button
+onclick="window.openMovie('${movie.id}')">
+
+Comprar entrada
+
+</button>
+
+</div>
+
+</div>
+
+`;
+
+});
+
+/* SCROLL */
+
+window.scrollMovies = ()=>{
+
+document
+.getElementById("movies")
+.scrollIntoView({
+behavior:"smooth"
+});
+
+};
+
+/* OPEN MOVIE */
+
+window.openMovie = (id)=>{
+
+const name =
+document.getElementById("name")
+.value.trim();
+
+const grade =
+document.getElementById("grade")
+.value;
+
+if(!name){
+alert("Escribe tu nombre");
+return;
+}
+
+if(!grade){
+alert("Selecciona tu grado");
+return;
+}
+
+const movie =
+movies.find(m=>m.id===id);
+
+if(movie.terror && grade==="Primaria"){
+alert("Solo secundaria");
+return;
+}
+
+reserve.innerHTML = `
+
+<div class="reserve-box">
+
+<h2>${movie.title}</h2>
+
+<div id="times"></div>
+
+<div id="bookingBox"></div>
+
+</div>
+
+`;
+
+const times =
+document.getElementById("times");
+
+movie.times.forEach(time=>{
+
+times.innerHTML += `
+
+<button
+class="time-btn"
+onclick="window.showSeats('${movie.id}','${time}')">
+
+${time}
+
+</button>
+
+`;
+
+});
+
+reserve.scrollIntoView({
+behavior:"smooth"
+});
+
+};
+
+/* SHOW SEATS */
+
+window.showSeats = async(movieId,time)=>{
+
+const snapshot =
+await getDocs(
+collection(db,"reservas")
+);
+
+const occupiedSeats = [];
+
+snapshot.forEach(docu=>{
+
+const data = docu.data();
+
+if(
+data.movieId===movieId &&
+data.time===time
+){
+
+occupiedSeats.push(...data.seats);
+
+}
+
+});
+
+document
+.getElementById("bookingBox")
+.innerHTML = `
+
+<div class="screen">
+
+PANTALLA
+
+</div>
+
+<div class="seats">
+
+${seats.map(seat=>`
+
+<button
+class="seat ${occupiedSeats.includes(seat) ? 'occupied':''}"
+${occupiedSeats.includes(seat) ? 'disabled':''}
+onclick="toggleSeat(this)">
+
+${seat}
+
+</button>
+
+`).join("")}
+
+</div>
+
+<button
+class="reserve-btn"
+onclick="window.confirmReserve('${movieId}','${time}')">
+
+Confirmar compra
+
+</button>
+
+`;
+
+};
+
+/* TOGGLE */
+
+window.toggleSeat = (btn)=>{
+
+btn.classList.toggle("selected");
+
+};
+
+/* RESERVE */
+
+window.confirmReserve = async(movieId,time)=>{
+
+const selected =
+[...document.querySelectorAll(".seat.selected")]
+.map(s=>s.textContent);
+
+if(selected.length===0){
+alert("Selecciona asientos");
+return;
+}
+
+const name =
+document.getElementById("name").value;
+
+const grade =
+document.getElementById("grade").value;
+
+const movie =
+movies.find(m=>m.id===movieId);
+
+await setDoc(
+
+doc(collection(db,"reservas")),
+
+{
+name,
+grade,
+movieId,
+movie:movie.title,
+time,
+seats:selected,
+bottles:selected.length*5,
+createdAt:Date.now()
+}
+
+);
+
+/* OVERLAY */
+
+const overlay =
+document.getElementById("cinemaOverlay");
+
+overlay.style.display = "flex";
+
+let count = 5;
+
+document
+.getElementById("countdown")
+.innerHTML = count;
+
+const interval =
+setInterval(()=>{
+
+count--;
+
+document
+.getElementById("countdown")
+.innerHTML = count;
+
+if(count <= 0){
+
+clearInterval(interval);
+
+overlay.style.display = "none";
+
+}
+
+},1000);
+
+/* SUCCESS */
+
+const success =
+document.createElement("div");
+
+success.className =
+"success";
+
+success.innerHTML =
+"✅ Reserva enviada al administrador";
+
+document.body.appendChild(success);
+
+setTimeout(()=>{
+success.remove();
+},3000);
+
+/* QR */
+
+const qr =
+`https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${encodeURIComponent(name+"-"+movie.title+"-"+selected.join(","))}`;
+
+/* TICKET */
+
+reserve.innerHTML += `
+
+<div class="ticket">
+
+<h3>🎟 Ticket Oficial</h3>
+
+<p><b>Nombre:</b> ${name}</p>
+
+<p><b>Grado:</b> ${grade}</p>
+
+<p><b>Película:</b> ${movie.title}</p>
+
+<p><b>Horario:</b> ${time}</p>
+
+<p><b>Asientos:</b> ${selected.join(", ")}</p>
+
+<p><b>Botellas:</b> ${selected.length*5}</p>
+
+<center>
+
+<img src="${qr}" width="150">
+
+</center>
+
+</div>
+
+`;
+
+};
+
+/* LIVE STATS */
+
+onSnapshot(
+collection(db,"reservas"),
+(snapshot)=>{
+
+let bottles = 0;
+let seats = 0;
+
+const ranking = {};
+
+snapshot.forEach(docu=>{
+
+const data = docu.data();
+
+bottles += data.bottles;
+seats += data.seats.length;
+
+ranking[data.grade] =
+(ranking[data.grade] || 0)
++ data.bottles;
+
+});
+
+document
+.getElementById("totalBottles")
+.innerHTML =
+`♻ Botellas: ${bottles}`;
+
+document
+.getElementById("totalSeats")
+.innerHTML =
+`🪑 Asientos: ${seats}`;
+
+document
+.getElementById("onlineUsers")
+.innerHTML =
+`👥 Usuarios: ${snapshot.size}`;
+
+const sorted =
+Object.entries(ranking)
+.sort((a,b)=>b[1]-a[1]);
+
+document
+.getElementById("rankingList")
+.innerHTML =
+sorted.map((item,index)=>`
+
+<p>
+
+${index+1}️⃣
+${item[0]}
+→ ${item[1]}♻
+
+</p>
+
+`).join("");
+
+});
+
+/* TIMER */
+
+function updateCountdown(){
+
+const now =
+new Date();
+
+const target =
+new Date();
+
+target.setHours(18);
+target.setMinutes(0);
+target.setSeconds(0);
+
+if(now > target){
+target.setDate(target.getDate()+1);
+}
+
+const diff =
+target - now;
+
+const hours =
+String(
+Math.floor(diff / 1000 / 60 / 60)
+).padStart(2,"0");
+
+const minutes =
+String(
+Math.floor(diff / 1000 / 60) % 60
+).padStart(2,"0");
+
+const seconds =
+String(
+Math.floor(diff / 1000) % 60
+).padStart(2,"0");
+
+document
+.getElementById("liveTimer")
+.innerHTML =
+`${hours}:${minutes}:${seconds}`;
+
+}
+
+setInterval(updateCountdown,1000);
+
+updateCountdown();
+
+/* ADMIN */
+
+document
+.getElementById("adminBtn")
+.addEventListener("click",()=>{
+
+const pass =
+prompt("Contraseña admin");
+
+if(pass !== "vqp2026"){
+
+alert("Incorrecta");
+return;
+
+}
+
+alert("🔥 Panel admin conectado a Firebase");
+
+});
+
+</script>
+
+</body>
+</html>
